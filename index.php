@@ -44,12 +44,16 @@
         $temp = [];
 
         foreach($hotels as $hotel) {
-            $park = $hotel['parking'] ? 'si': 'no';
+            $park = $hotel['parking'] ? 'si' : 'no';
             if($park == $_GET['parking']) {
                 $temp[] = $hotel; 
             }
         }
         $hotels = $temp;
+    }
+    if(isset($_GET['vote']) && !empty($_GET['vote'])) {
+        $vote = $_GET['vote'];
+        $hotels = array_filter($hotels, fn($value) => $value['vote'] >= $vote);
     }   
 
 ?>
@@ -62,19 +66,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="stylesheet" href="./style.css">
-    <title>Hotel</title>
+    <title>Hotels</title>
 </head>
 <body>
     <div class="container">
-        <h1 class="text-center my-5 display-2 fw-bold">Hotels</h1>
+        <h1 class="text-center mt-5 display-1 fw-bold">Hotels</h1>
+        <h5 class="text-center mt-3 mb-5">Trova il tuo hotel</h5>
         <div class="my-5">
             <form action="index.php" method="GET">
-                <label for="parking">Vuoi il parcheggio?</label>
-                <select name="parking" class="form-select w-25" id="parking">
-                    <option value="">Scegli</option>
-                    <option value="si">Parcheggio</option>
-                    <option value="no">No Parcheggio</option>
-                </select>
+                <div class="d-flex">
+                    <div class="me-5">
+                        <label for="parking">Vuoi il parcheggio?</label>
+                        <select name="parking" class="form-select" id="parking">
+                            <option value="">Scegli</option>
+                            <option value="si">Parcheggio</option>
+                            <option value="no">No Parcheggio</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="vote">Seleziona un voto da 1 a 5</label>
+                        <select name="vote" class="form-select" id="vote">
+                            <option value="">Scegli</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                </div>
                 <button type="submit" class="btn btn-primary mt-4">Invia</button>
             </form>
         </div>
