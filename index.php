@@ -54,15 +54,27 @@
 </head>
 <body>
     <div class="container">
-      <div class='d-flex flex-row flex-wrap justify-content-between'>
+      <div class='d-flex flex-wrap justify-content-between'>
         <?php foreach($hotels as $hotel) { ?>
-            <div>
-                <p><?php echo $hotel['name']; ?></p>
-                <p><?php echo $hotel['description']; ?></p>
-                <p><?php echo $hotel['parking']; ?></p>
-                <p><?php echo $hotel['vote']; ?></p>
-                <p><?php echo $hotel['distance_to_center']; ?></p>
-            </div>
+            <table class='table'>
+                <thead>
+                    <tr>
+                        <th scope='col'>name</th>
+                        <th scope='col'>description</th>
+                        <th scope='col'>parking</th>
+                        <th scope='col'>vote</th>
+                        <th scope='col'>distance of center</th>
+                    </tr>
+                    <tr>
+                        <td><?php echo $hotel['name']; ?></td>
+                        <td><?php echo $hotel['description']; ?></td>
+                        <td><?php echo $hotel['parking']; ?></td>
+                        <td><?php echo $hotel['vote']; ?></td>
+                        <td><?php echo $hotel['distance_to_center']; ?></td>
+                    </tr>
+                </thead>
+                
+            </table>
         <?php
         }
         ?>
